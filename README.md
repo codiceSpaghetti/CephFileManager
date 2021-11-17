@@ -23,7 +23,7 @@ We deployed a Load Balancer module that acts as dispatcher of clients’ request
 Each time a request is received, the Load Balancer retrieves the list of Backend instances available at that moment from a MySQL database, which stores their IPs. This MySQL works as a Shared Storage tier and thanks to it we could easily update the state of the cluster, adding or removing Backend modules, to handle run time changes in the deployment’ state.
 We could easily deploy more Load Balancer instances that, by interacting with the MySQL database, would always share the same view of the Backend cluster.
 
-<img src='imgs/architecture-design.png'>
+<img src='architecture-design.png'>
 
 ## Frontend Design
 We provide the following methods:
