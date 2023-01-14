@@ -1,7 +1,13 @@
-Project for the <i>'Cloud Computing'</i> course. Please, check the [Documentation](Documentation.pdf) for a complete view. 
+# Ceph File Manager
+## Introduction to Ceph
+**Ceph** is an open-source, **distributed storage system** that provides object, block, and file storage. 
 
-## Project Specifications
-Develop a distributed file storage system based on Ceph. The file storage must expose a REST interface through which external users can perform the following operations:
+It is designed to be highly scalable, fault-tolerant, and self-healing. Data is stored and replicated across multiple nodes, and it can be accessed via various storage interfaces. 
+
+Ceph uses a unique algorithm called CRUSH to ensure data is distributed and available optimally. It is widely used in cloud computing and big data solutions and supported by many Linux distributions and cloud providers.
+
+## What we want to achieve
+In this project we want to build a distributed file storage system based on Ceph. The file storage must expose a REST interface through which external users can perform the following operations:
 - Retrieve the list of files currently stored in the system
 - Delete a file
 - Upload / Download a file
@@ -13,6 +19,8 @@ The application must be composed of two layers:
 
 A different instance of the backend layer must be deployed on each of the three ceph-mon modules that are part of our installation.
 
+Please, check the [Documentation](Documentation.pdf) for a complete view. 
+
 ## Architectural Design
 The design of the application follows a Service-Oriented Architecture approach; each module exposes a REST interface. We exploit such approach to have a synchronous communication between Client and Server.
 
@@ -23,7 +31,9 @@ We deployed a Load Balancer module that acts as dispatcher of clients’ request
 Each time a request is received, the Load Balancer retrieves the list of Backend instances available at that moment from a MySQL database, which stores their IPs. This MySQL works as a Shared Storage tier and thanks to it we could easily update the state of the cluster, adding or removing Backend modules, to handle run time changes in the deployment’ state.
 We could easily deploy more Load Balancer instances that, by interacting with the MySQL database, would always share the same view of the Backend cluster.
 
-<img src='architecture-diagram.png'>
+<p align="center">
+  <img src='architecture-diagram.png'>
+</p>
 
 ## Frontend Design
 We provide the following methods:
@@ -33,7 +43,7 @@ We provide the following methods:
 - GET /objects/filename - to retrieve a specific file
 - GET /status - to retrieve the current statistics of the cluster
 
-# [For the Professor]
+# How to use this repo
 
 We will first illustrate how to test the application in the cluster and then 
 explain how to install all the required modules and file needed to replicate 
